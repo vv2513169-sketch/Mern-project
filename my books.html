@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGEN Library - My Books</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .my-books-container {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        .my-books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .transaction-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .transaction-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .transaction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .transaction-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .transaction-status {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+        }
+
+        .status-borrowed {
+            background: var(--warning-bg);
+            color: var(--warning);
+        }
+
+        .status-returned {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+
+        .status-overdue {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+
+        .transaction-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: auto;
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            padding: 4rem 2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <i class="ph-fill ph-books" style="color: var(--accent-primary);"></i>
+            <h2>NextGEN</h2>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html" class="nav-item">
+                <i class="ph ph-squares-four"></i>
+                Dashboard
+            </a>
+            <a href="catalog.html" class="nav-item">
+                <i class="ph ph-book-open"></i>
+                Catalog
+            </a>
+            <a href="my-books.html" class="nav-item active">
+                <i class="ph ph-bookmark-simple"></i>
+                My Books
+            </a>
+            <a href="members.html" class="nav-item">
+                <i class="ph ph-users"></i>
+                Members
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="ph ph-chart-bar"></i>
+                Reports
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="ph ph-gear"></i>
+                Settings
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="ph ph-moon"></i>
+                <span>Dark Mode</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Context -->
+    <main class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="search-bar">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" placeholder="Search your borrowed books...">
+            </div>
+            <div class="user-profile">
+                <div class="notification-badge">
+                    <i class="ph ph-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+                <div class="avatar">
+                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff" alt="User Avatar">
+                </div>
+            </div>
+        </header>
+
+        <!-- Dynamic Content Area -->
+        <div class="dashboard-content" style="max-width: 1200px;">
+            <div class="section-header">
+                <h2>My Borrowed Books</h2>
+                <div style="color: var(--text-secondary); margin-top: 0.5rem;">
+                    View your active borrowings and transaction history.
+                </div>
+            </div>
+
+            <div class="my-books-container">
+                <div id="transactionsContainer" class="my-books-grid">
+                    <div class="empty-state" style="text-align: center;">
+                        <i class="ph ph-spinner-gap ph-spin" style="font-size: 2rem; color: var(--accent-primary);"></i>
+                        <p style="margin-top: 1rem; color: var(--text-secondary);">Loading your transactions...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
